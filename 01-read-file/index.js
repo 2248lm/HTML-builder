@@ -5,3 +5,4 @@ const fileInnerText = fs.createReadStream(fileDirectory, 'utf-8');
 let data = '';
 fileInnerText.on('data', chunk => data += chunk);
 fileInnerText.on('end', () => console.log(data));
+fileInnerText.on('error', error => console.log('Error', error.message));
