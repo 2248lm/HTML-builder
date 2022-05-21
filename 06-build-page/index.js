@@ -24,7 +24,8 @@ readTemplate.on('end', () => {
   findTag(templateInner);
 });
 readTemplate.on('error', error => console.log('Error: ', error.message));
-const findTag = (text) => {
+
+async function findTag(text) {
   fs.readdir(componentsFolder, { withFileTypes: true }, (err, files) => {
     if (err) { throw err; }
     const tags = text.match(/{{(.*?)}}/g);
@@ -81,7 +82,7 @@ fs.readdir(stylesSource, { withFileTypes: true }, (err, files) => {
   }
 });
 
-const copyAssets = (originalFolder, copyFolder) => {
+async function copyAssets(originalFolder, copyFolder) {
   fs.mkdir(copyFolder, { recursive: true }, err => {
     if (err) { throw err; }
   });
