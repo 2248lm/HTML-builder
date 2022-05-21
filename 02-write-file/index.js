@@ -9,7 +9,6 @@ stdin.on('data', data => {
   const message = data.toString().trim();
   if (message === 'exit') {
     writeStream.end();
-    process.on('exit', () => console.log('\nУдачи в изучении Node.js!\n'));
     process.exit();
   }
   else {
@@ -17,6 +16,12 @@ stdin.on('data', data => {
   }
 });
 process.on('SIGINT', () => {
-  console.log('\nУдачи в изучении Node.js!\n');
   process.exit();
+});
+process.on('exit', code => {
+  if (code === 0) {
+    console.log('\nУдачи в изучении Node.js!\n');
+  } else {
+    console.log(`Ошибка: ${code}`);
+  }
 });
